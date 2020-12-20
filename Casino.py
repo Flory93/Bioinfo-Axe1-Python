@@ -44,11 +44,11 @@ while Continuer_partie:#tant qu'on doit continuer la partie
           print ("Votre cagnotte s'élève donc à", Argent,"$")
   elif result%2!=0 and Numéro%2!=0:
           Argent += ceil(argent_mise/2)
-          print ("Bravo !", Numéro, "et", result, "sont des nombres impairs \nVous remportez la moitiée de votre mise\nCela correspond à", (argent_mise/2),"$")
+          print ("Bravo !", Numéro, "et", result, "sont des nombres impairs \nVous remportez la moitiée de votre mise\nCela correspond à", ceil(argent_mise/2),"$")
           print ("Votre cagnotte s'élève donc à", Argent,"$")
   elif result%2==0 and Numéro%2==0:
           Argent += ceil(argent_mise/2)
-          print ("Bravo !", Numéro, "et", result, "sont des nombres pairs \nVous remportez la moitiée de votre mise\nCela correspond à", (argent_mise/2),"$")
+          print ("Bravo !", Numéro, "et", result, "sont des nombres pairs \nVous remportez la moitiée de votre mise\nCela correspond à", ceil(argent_mise/2),"$")
           print ("Votre cagnotte s'élève donc à", Argent,"$")
   else :
           Argent -= argent_mise
@@ -76,6 +76,8 @@ while Continuer_partie:#tant qu'on doit continuer la partie
             elif reponse == "non":
                 Continuer_partie = False
                 print ("Vous avez décidé de quitter la partie\nMerci à vous\nNous espérons vous revoir très vite.")
+
+                #fin du game
                 
 
           
