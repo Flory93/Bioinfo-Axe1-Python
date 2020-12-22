@@ -17,8 +17,8 @@ while Continuer_partie:#tant qu'on doit continuer la partie
   while pari == -1:
       Numero = input("Sur quel numéro voulez vous parier entre 0 et 49 ? : ")	
       try:
-      	Numero = int(Numéro)
-      	assert Numero > -1 and Numéro < 50
+      	Numero = int(Numero)
+      	assert Numero > -1 and Numero < 50
       except AssertionError:
         print("Votre numéro n'est pas compris entre 0 et 49 \nVeuillez changer de numéro s'il vous plait")
         continue
