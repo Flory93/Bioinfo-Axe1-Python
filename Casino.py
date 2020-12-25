@@ -78,6 +78,7 @@ while Continuer_partie:#tant qu'on doit continuer la partie
                 print ("Vous avez décidé de quitter la partie\nMerci à vous\nNous espérons vous revoir très vite.")
 
                 #fin du game
+                #Corrections Openclassroom
                 
 
           
