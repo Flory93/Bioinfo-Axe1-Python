@@ -8,52 +8,61 @@ from random import randrange
 
 #Déclaration des variables
 Argent = 5000
-Continuer_partie = True
+Continuer_partie = True #Booléen qui est vrai tant qu'on doit continuer la partie
 
 print("Vous vous installez à la table de roulette avec",Argent,"$")
 
 while Continuer_partie:#tant qu'on doit continuer la partie
   pari = -1
-  while pari == -1:
-      Numéro = input("Sur quel numéro voulez vous parier entre 0 et 49 ? : ")	
+  while pari < 0 or pari > 49:
+      pari = input("Sur quel numéro voulez vous parier entre 0 et 49 ? : ")	
       try:
-      	Numéro = int(Numéro)
-      	assert Numéro > -1 and Numéro < 50
-      except AssertionError:
-        print("Votre numéro n'est pas compris entre 0 et 49 \nVeuillez changer de numéro s'il vous plait")
+      	pari = int(pari) # On convertit le nombre misé
+      except ValueError:
+        print("Vous n'avez pas saisi de nombre")
+        pari = -1
         continue
-      pari += (Numéro+1)
-      print ("Vous avez parié sur le numéro", Numéro,".","Passons à l'argent que vous voulez miser")
+      if pari < 0:
+        print ("Ce nombre est négatif")
+      if pari > 49:
+        print ("Ce nombre est supérieur à 49")
   
+  # A présent on séléctionne la somme à miser sur le nombre
   mise = 0
-  while mise == 0:
-        argent_mise = input("Votre mise: ")
+  while mise <= 0 or mise > Argent:
+        mise = input("Tapez le montant de votre mise: ")
         try:
-          argent_mise = int(argent_mise)
-          assert argent_mise > 0 and argent_mise <= Argent
-        except AssertionError:
-          print ("Vous ne pouvez pas parier cette somme \nSoit vous n'avez pas assez d'argent, soit votre mise n'est pas supérieure à 0$ \nVeuillez modifier vore mise s'il vous plait")
+          mise = int(mise)
+        except ValueError:
+          print ("Vous n'avez pas saisi de nombre")
           continue
-        mise += argent_mise
-        print ("Vous avez misé", argent_mise, "$ \nIl est temps de lancer la roulette !\nC'est parti, les jeux sont faits, rien ne va plus........ ")
-        result = randrange(50)
-        print ("Et le numéro gagnant est ...", result,"!")
-  if result==Numéro:
-          Argent += argent_mise*3
-          print ("Bravo ! Votre Numéro","(", Numéro,")","et le résultat du lancé","(",result,") sont identiques ! \nVous remportez 3 fois votre mise\nCela correspond à", (argent_mise*3),"$")
+        if mise <= 0:
+          print ("La mise saisi est négative ou nulle\nVeuillez modifier votre mise")
+        if mise > Argent:
+          print ("Vous ne pouvez miser autant, vous n'avez que", Argent, "$\nVeuillez modifier votre mise")
+  
+  #Le nombre misé et la mise ont été sélectionné
+  #On fait touner la roulette
+
+  print ("Vous avez misé", mise, "$ \nIl est temps de lancer la roulette !\nC'est parti, les jeux sont faits, rien ne va plus........ ")
+  result = randrange(50)
+  print ("Et le numéro gagnant est ...", result,"!")
+  
+
+  # On établit le gain du joueur
+  if result==pari:
+          Argent += mise*3
+          print ("Bravo ! Votre Numéro","(", pari,")","et le résultat du lancé","(",result,") sont identiques ! \nVous remportez 3 fois votre mise\nCela correspond à", (mise*3),"$")
           print ("Votre cagnotte s'élève donc à", Argent,"$")
-  elif result%2!=0 and Numéro%2!=0:
-          Argent += ceil(argent_mise/2)
-          print ("Bravo !", Numéro, "et", result, "sont des nombres impairs \nVous remportez la moitiée de votre mise\nCela correspond à", ceil(argent_mise/2),"$")
-          print ("Votre cagnotte s'élève donc à", Argent,"$")
-  elif result%2==0 and Numéro%2==0:
-          Argent += ceil(argent_mise/2)
-          print ("Bravo !", Numéro, "et", result, "sont des nombres pairs \nVous remportez la moitiée de votre mise\nCela correspond à", ceil(argent_mise/2),"$")
+  elif result%2 == pari%2: #Ils sont de la même couleur
+          Argent += ceil(mise/2)
+          print ("Bravo !", pari, "et", result, "sont des nombres impairs \nVous remportez la moitiée de votre mise\nCela correspond à", ceil(mise/2),"$")
           print ("Votre cagnotte s'élève donc à", Argent,"$")
   else :
-          Argent -= argent_mise
+          Argent -= mise
           print ("Manque de chance, vous avez perdu !\nVotre mise est récupérée par le croupier \n Votre cagnote s'élève donc à",Argent,"$")
-                 
+  
+  # On interrompt la partie si le joueur est ruiné               
   if Argent == 0:
             Continuer_partie = False
             print ("Malheureusement, vous n'avez plus d'argent\nVous devez quitter la table\nRevenez une prochaine fois !")
