@@ -56,7 +56,7 @@ while Continuer_partie:#tant qu'on doit continuer la partie
           print ("Votre cagnotte s'élève donc à", Argent,"$")
   elif result%2 == pari%2: #Ils sont de la même couleur
           Argent += ceil(mise/2)
-          print ("Bravo !", pari, "et", result, "sont des nombres impairs \nVous remportez la moitiée de votre mise\nCela correspond à", ceil(mise/2),"$")
+          print ("Bravo !", pari, "et", result, "ont la même couleur \nVous remportez la moitiée de votre mise\nCela correspond à", ceil(mise/2),"$")
           print ("Votre cagnotte s'élève donc à", Argent,"$")
   else :
           Argent -= mise
@@ -66,28 +66,33 @@ while Continuer_partie:#tant qu'on doit continuer la partie
   if Argent == 0:
             Continuer_partie = False
             print ("Malheureusement, vous n'avez plus d'argent\nVous devez quitter la table\nRevenez une prochaine fois !")
-
+  
+  # On questionne le joueur sur sa volonté de continuer le jeu ou non
   elif Argent > 0:
-    
-    
-    décision = "innexistante"
-    while décision == "innexistante": 
-            reponse = input("Souhaitez vous continuer la partie (oui/non) ?: ")
+    decision = "innexistante"
+    while decision == "innexistante": 
+            decision = input("Souhaitez vous continuer la partie (oui/non) ?: ")
             try:
-              reponse == "oui" or reponse == "non" 
-              assert reponse == "oui" or reponse == "non"
+              decision == "oui" or decision == "non" 
+              assert decision == "oui" or decision == "non"
             except AssertionError:
               print ("Veuillez répondre par oui ou par non s'il vous plait")
               continue
-            décision += reponse
-            if reponse == "oui":
+            if decision == "oui":
                 print("La partie continue")
-            elif reponse == "non":
+            elif decision == "non":
                 Continuer_partie = False
                 print ("Vous avez décidé de quitter la partie\nMerci à vous\nNous espérons vous revoir très vite.")
 
-                #fin du game
-                #Corrections Openclassroom
+  # Option OpenClassroom 
+      # else :
+            # quitter = input("Souhaitez vous quitter le casino (o/n) ? 
+            # if quitter == "o" or quitter == "O":
+                #print ("Vous quittez le casino avec vos gains, soit", Argent, "$")
+                #Continuer_partie = False              
+
+  #fin du game
+  #Corrections Openclassroom
                 
 
           
